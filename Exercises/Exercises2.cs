@@ -2,10 +2,9 @@ namespace ConcurrentTasks.Exercises;
 
 public class Exercise2
 {
-    public async Task Run()
+    public static async Task Run()
     {
-        // Código do exercício 2
-        string[] urls = new string[]
+        var urls = new[]
         {
             "https://www.google.com",
             "https://www.microsoft.com",
@@ -15,9 +14,9 @@ public class Exercise2
 
         var tasks = urls.Select(async url =>
         {
-            using HttpClient client = new HttpClient();
+            using var client = new HttpClient();
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var response = await client.GetAsync(url);
+            await client.GetAsync(url);
             stopwatch.Stop();
             Console.WriteLine($"URL: {url} - Tempo de Resposta: {stopwatch.ElapsedMilliseconds} ms");
         });

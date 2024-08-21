@@ -4,21 +4,20 @@ namespace ConcurrentTasks.Exercises;
 
 public class Exercise1
 {
-    public void Run(bool withSleep)
+    public static void Run(bool withSleep)
     {
-        // Código do exercício 1
         var queue = new ConcurrentQueue<int>();
         var cts = new CancellationTokenSource();
         var token = cts.Token;
 
-        int sum = 0;
+        var sum = 0;
 
         var producerTask = Task.Run(() =>
         {
             var random = new Random();
             while (!token.IsCancellationRequested)
             {
-                int number = random.Next(1, 101);
+                var number = random.Next(1, 101);
                 queue.Enqueue(number);
                 Console.WriteLine($"Número gerado: {number}");
 
@@ -33,9 +32,9 @@ public class Exercise1
         {
             while (!token.IsCancellationRequested)
             {
-                if (queue.TryDequeue(out int number))
+                if (queue.TryDequeue(out var number))
                 {
-                    int previousSum = sum;
+                    var previousSum = sum;
                     sum += number;
                     Console.WriteLine($"{previousSum} + {number} = {sum}");
                 }
