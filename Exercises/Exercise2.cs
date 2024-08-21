@@ -9,7 +9,7 @@ public class Exercise2
             "https://www.google.com",
             "https://www.microsoft.com",
             "https://www.github.com",
-            "https://www.stackoverflow.com"
+            "https://www.anthropic.com/claude"
         };
 
         var tasks = urls.Select(async url =>
